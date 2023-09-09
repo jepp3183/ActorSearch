@@ -4,3 +4,4 @@ postgres/data/title.basics.tsv.gz
 postgres/data/title.principals.tsv.gz
 postgres/data/title.ratings.tsv.gz
 ./.env
+.env
