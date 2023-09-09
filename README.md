@@ -1,10 +1,10 @@
 # ActorSearch
 ![image](https://github.com/jepp3183/ActorSearch/assets/23053972/a253a536-da6e-4718-bb89-4fd277c90093)
 Simple app mainly developed to experiment with a few different libraries and how they work together:
-- [Axum](https://github.com/tokio-rs/axum) as the web framework for the back-end
+- [Rust](https://www.rust-lang.org) and [Axum](https://github.com/tokio-rs/axum) as the web framework for the back-end
 - [SQLx](https://github.com/launchbadge/sqlx) to connect a postgres database with compile-time checked queries!
-- [Redis](https://redis.io/) for caching poster-url responses from the simple (but slow) [OMDB Api](https://redis.io/)
-- [Tera](https://github.com/Keats/tera), [HTMX](htmx.org), and [Tailwind](tailwindcss.com) for the front-end
+- [Redis](https://redis.io/) for caching poster-url responses from the simple (but slow) [OMDB Api](https://www.omdbapi.com/)
+- [Tera](https://github.com/Keats/tera), [HTMX](https://www.htmx.org), and [Tailwind](tailwindcss.com) for the front-end
 
 
 ## Running
