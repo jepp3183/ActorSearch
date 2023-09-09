@@ -1,0 +1,39 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PW}
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres/data:/data_tsv
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  redis:	
+    container_name: redis
+    image: redis:latest
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PW}
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data:/data
+    command: "redis-server --save 360 5 --loglevel warning"
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SERVER_PORT=${SERVER_PORT}
+      - OMDB_KEY=${OMDB_KEY}
+    ports: 
+      - ${SERVER_PORT}:${SERVER_PORT}
+    depends_on:
+      - redis
+      - postgres

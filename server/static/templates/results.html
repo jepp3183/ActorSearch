@@ -1,0 +1,38 @@
+<div id="actors" class="flex flex-row flex-wrap justify-center gap-3"> 
+    {% for actor in actors %}
+    <div value={{actor}} 
+        class="flex flex-row items-center px-2 py-1 font-semibold bg-blue-600 rounded cursor-pointer hover:bg-blue-700 actor-button"
+        onclick="this.remove(); htmx.trigger('#actor_form','submit')"
+    >
+        <p class="mr-1">{{actor}}</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 22" stroke-width="2.0" stroke="white" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <input type="hidden" name="actors" value="{{actor}}">
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<div id="results" class="items-stretch px-4 mt-3 font-sans justify-items-stretch grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3">
+    {% for record in results %}
+    <a href="https://www.imdb.com/title/{{record.tconst}}" target="_blank" class="group">
+    <div  class="flex flex-col justify-center w-full h-full shadow-md bg-sky-700 group-hover:bg-sky-800 text-bold rounded-xl">
+        <div class="flex flex-col justify-start mb-2 grow">
+            <img 
+                onerror="this.src='/static/placeholder.jpg'" 
+                loading="lazy" 
+                class="w-full h-full overflow-hidden rounded-t-xl" 
+                src="/api/poster/{{record.tconst}}"
+            >
+        </div>
+        <div class="px-2 pb-2 text-lg">
+            <p class="h-[3.5rem] mb-1 line-clamp-2">{{record.primarytitle}}</p>
+            <p><span class="font-semibold">Year</span>: {{record.startyear}}</p>
+            <p><span class="font-semibold">Rating</span>: {{record.averagerating}}</p>
+        </div>
+    </div>
+    </a>
+    {% endfor %}
+</div>

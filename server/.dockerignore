@@ -1,0 +1,4 @@
+/target
+/.git
+tailwind.config.js
+makefile

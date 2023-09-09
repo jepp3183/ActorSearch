@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT nb.primaryName\n            FROM name_basics nb\n            WHERE nb.primaryName LIKE $1 or nb.primaryName LIKE $2\n            LIMIT 10;\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "primaryname",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      true
+    ]
+  },
+  "hash": "1a283e18affb3c5cf6d538fe3908d3c37fe6f515d205d86898e389e83c0c6627"
+}

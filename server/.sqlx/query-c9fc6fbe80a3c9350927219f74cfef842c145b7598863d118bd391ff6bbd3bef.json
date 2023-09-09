@@ -1,0 +1,41 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT tb.primaryTitle, tb.startYear, tr.averagerating::varchar(10), tb.tconst\n            FROM title_basics tb\n            join title_ratings tr on tb.tconst  = tr.tconst\n            WHERE tb.tconst IN (\n                SELECT tp.tconst\n                FROM title_principals tp\n                WHERE tp.nconst IN (\n                    SELECT nb.nconst\n                    FROM name_basics nb\n                    WHERE nb.primaryName = ANY($1)\n                )\n                GROUP BY tp.tconst\n                HAVING COUNT(DISTINCT tp.nconst) = $2\n            )\n            and tb.titleType in ('movie', 'tvSeries', 'tvMovie', 'tvMiniSeries', 'tvShort','short', 'video', 'videoGame', 'tvSpecial')\n            order by tr.numVotes desc;\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "primarytitle",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 1,
+        "name": "startyear",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "averagerating",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "tconst",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "TextArray",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      true,
+      true,
+      null,
+      false
+    ]
+  },
+  "hash": "c9fc6fbe80a3c9350927219f74cfef842c145b7598863d118bd391ff6bbd3bef"
+}
