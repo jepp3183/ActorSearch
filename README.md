@@ -23,4 +23,6 @@ REDIS_URL=redis://redis:6379
 
 SERVER_PORT=5000
 ```
-3. Next, simply run `docker-compose up` from the root directory. It will take a while for postgres to import the data, and the site will not be available before the process has completed.
+3. Next, simply run `docker-compose up` from the root directory.
+   - It might take a little while to compile the rust-app the first time.
+   - It will take a while for postgres to import the data, and the site will not be available before the process has completed.
